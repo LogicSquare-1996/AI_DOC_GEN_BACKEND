@@ -47,7 +47,19 @@ module.exports = {
    *                   type: boolean
    *                   example: false
    *                 user:
-   *                   $ref: '#/components/schemas/User'
+   *                   type: object
+   *                   properties:
+   *                     email:
+   *                       type: string
+   *                     phone:
+   *                       type: string
+   *                     name:
+   *                       type: object
+   *                       properties:
+   *                         first:
+   *                           type: string
+   *                         last:
+   *                           type: string
    *             examples:
    *               application/json:
    *                 value:

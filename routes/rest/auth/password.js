@@ -7,31 +7,34 @@ const User = require("../../../models/user")
 
 module.exports = {
   /**
-   *
-   * @api {post} /forgotpassword Request to get password reset link in mail
-   * @apiName forgotPassword
-   * @apiGroup Auth
-   * @apiVersion  1.0.0
-   * @apiPermission Public
-   *
-   *
-   * @apiParam  {String} handle (email)
-   *
-   * @apiSuccess (200) {json} name description
-   *
-   * @apiParamExample  {json} Request-Example:
-   * {
-   *     "handle" : "myEmail@logic-square.com"
-   * }
-   *
-   *
-   * @apiSuccessExample {json} Success-Response:
-   * {
-   *     "error" : false,
-   *     "handle" : "myEmail@logic-square.com"
-   * }
-   *
-   *
+   * @swagger
+   * /forgotpassword:
+   *   post:
+   *     summary: Request to get password reset link in mail
+   *     tags: [Auth]
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               handle:
+   *                 type: string
+   *                 description: The user's email.
+   *                 example: "myEmail@logic-square.com"
+   *     responses:
+   *       200:
+   *         description: The password reset link was sent successfully.
+   *         content:
+   *           application/json:
+   *             examples:
+   *               application/json:
+   *                 value:
+   *                   error: false
+   *                   handle: "myEmail@logic-square.com"
+   *       500:
+   *         description: Some server error.
    */
   async startWorkflow(req, res) {
     try {
@@ -80,33 +83,39 @@ module.exports = {
   },
 
   /**
-   *
-   * @api {post} /resetpassword Request to set a new password
-   * @apiName resetPassword
-   * @apiGroup Auth
-   * @apiVersion  1.0.0
-   * @apiPermission Public
-   *
-   *
-   * @apiParam  {String} token
-   * @apiParam  {String} password
-   * @apiParam  {String} email
-   *
-   * @apiSuccess (200) {json} name description
-   *
-   * @apiParamExample  {json} Request-Example:
-   * {
-   *     "email" : "myEmail@logic-square.com"
-   * }
-   *
-   *
-   * @apiSuccessExample {json} Success-Response:
-   * {
-   *     "error" : false,
-   *     "email" : "myEmail@logic-square.com"
-   * }
-   *
-   *
+   * @swagger
+   * /resetpassword:
+   *   post:
+   *     summary: Request to set a new password
+   *     tags: [Auth]
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               token:
+   *                 type: string
+   *                 description: The password reset token.
+   *               password:
+   *                 type: string
+   *                 description: The new password.
+   *               email:
+   *                 type: string
+   *                 description: The user's email.
+   *     responses:
+   *       200:
+   *         description: The password was reset successfully.
+   *         content:
+   *           application/json:
+   *             examples:
+   *               application/json:
+   *                 value:
+   *                   error: false
+   *                   email: "myEmail@logic-square.com"
+   *       500:
+   *         description: Some server error.
    */
   async resetPassword(req, res) {
     try {

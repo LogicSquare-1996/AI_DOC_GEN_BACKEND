@@ -2,34 +2,40 @@ const User = require("../../models/user")
 
 module.exports = {
   /**
-    *
-    * @api {get} /user/:id get user details
-    * @apiName userDetails
-    * @apiGroup Admin-User
-    * @apiVersion  1.0.0
-    * @apiPermission User
-    *
-    * @apiHeader {String} Authorization The JWT Token in format "Bearer xxxx.yyyy.zzzz"
-    *
-    * @apiParam {String} id Users unique ID.
-    *
-    * @apiSuccess (200) {json} name description
-    *
-    * @apiSuccessExample {type} Success-Response:
-      {
-        "error" : false,
-        "user" : {
-          "email": "myEmail@logic-square.com",
-          "phone": "00000000000",
-          "name"  : {
-            "first":"Jhon",
-            "last" :"Doe"
-          }
-        }
-      }
-    *
-    *
-  */
+   * @swagger
+   * /admin/user/{id}:
+   *   get:
+   *     summary: Get user details
+   *     tags: [Admin-User]
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         schema:
+   *           type: string
+   *         required: true
+   *         description: The user ID
+   *     responses:
+   *       200:
+   *         description: The user description by id
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/User'
+   *             examples:
+   *               application/json:
+   *                 value:
+   *                   error: false
+   *                   user:
+   *                     email: "myEmail@logic-square.com"
+   *                     phone: "00000000000"
+   *                     name:
+   *                       first: "Jhon"
+   *                       last: "Doe"
+   *       500:
+   *        description: Some server error
+   *     security:
+   *       - bearerAuth: []
+   */
   async get(req, res) {
     try {
       const {

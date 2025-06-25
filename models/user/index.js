@@ -1,3 +1,39 @@
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: The user ID.
+ *           example: "60e4b5b0e4b0c7001f8e4b0a"
+ *         username:
+ *           type: string
+ *           description: The user's username.
+ *           example: "johndoe"
+ *         firstName:
+ *           type: string
+ *           description: The user's first name.
+ *           example: "John"
+ *         lastName:
+ *           type: string
+ *           description: The user's last name.
+ *           example: "Doe"
+ *         email:
+ *           type: string
+ *           description: The user's email.
+ *           example: "johndoe@example.com"
+ *         phone:
+ *           type: string
+ *           description: The user's phone number.
+ *           example: "1234567890"
+ *         gender:
+ *           type: string
+ *           description: The user's gender.
+ *           example: "Male"
+ */
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 const randomstring = require("randomstring")

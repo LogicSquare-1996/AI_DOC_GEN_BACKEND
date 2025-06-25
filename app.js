@@ -44,6 +44,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+require('./lib/swagger')(app);
+
 app.use('/', webRouter);
 app.use(`/api/v${process.env.API_VERSION}`, restRouter);
 app.use(`/admin/v${process.env.API_VERSION}`, adminRouter);

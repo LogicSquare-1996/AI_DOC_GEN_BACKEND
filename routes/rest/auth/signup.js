@@ -2,46 +2,67 @@ const User = require("../../../models/user")
 
 module.exports = {
   /**
-    *
-    * @api {post} /signup User registration
-    * @apiName userRegistration
-    * @apiGroup Auth
-    * @apiVersion  1.0.0
-    * @apiPermission Public
-    *
-    *
-    * @apiParam  {String} email
-    * @apiParam  {String} phone
-    * @apiParam  {Object} name
-    * @apiParam  {String} password
-    *
-    * @apiSuccess (200) {json} name description
-    *
-    * @apiParamExample  {json} Request-Example:
-      {
-        "email": "myEmail@logic-square.com",
-        "phone": "00000000000",
-        "name": {
-          "first":"Jhon",
-          "last" :"Doe"
-        }
-      }
-    *
-    * @apiSuccessExample {json} Success-Response:
-      {
-        "error": false,
-        "user": {
-          "email": "myEmail@logic-square.com",
-          "phone": "00000000000",
-          "name": {
-            "first":"Jhon",
-            "last" :"Doe"
-          }
-        }
-      }
-    *
-    *
-    */
+   * @swagger
+   * /signup:
+   *   post:
+   *     summary: User registration
+   *     tags: [Auth]
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               email:
+   *                 type: string
+   *                 description: The user's email.
+   *                 example: "myEmail@logic-square.com"
+   *               phone:
+   *                 type: string
+   *                 description: The user's phone number.
+   *                 example: "00000000000"
+   *               name:
+   *                 type: object
+   *                 properties:
+   *                   first:
+   *                     type: string
+   *                     example: "Jhon"
+   *                   last:
+   *                     type: string
+   *                     example: "Doe"
+   *               password:
+   *                 type: string
+   *                 description: The user's password.
+   *                 example: "myNewPassword"
+   *     responses:
+   *       200:
+   *         description: The user was registered successfully.
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 error:
+   *                   type: boolean
+   *                   example: false
+   *                 user:
+   *                   $ref: '#/components/schemas/User'
+   *             examples:
+   *               application/json:
+   *                 value:
+   *                   error: false
+   *                   user:
+   *                     email: "myEmail@logic-square.com"
+   *                     phone: "00000000000"
+   *                     name:
+   *                       first: "Jhon"
+   *                       last: "Doe"
+   *       400:
+   *         description: Bad request.
+   *       500:
+   *         description: Some server error.
+   */
   async post(req, res) {
     try {
       const {

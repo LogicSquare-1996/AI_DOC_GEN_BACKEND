@@ -4,34 +4,53 @@ const User = require("../../../models/user")
 
 module.exports = {
   /**
-   *
-   * @api {post} /login User login
-   * @apiName userLogin
-   * @apiGroup Auth
-   * @apiVersion  1.0.0
-   * @apiPermission Public
-   *
-   *
-   * @apiParam  {String} handle (mobile / email)
-   * @apiParam  {String} password user's password
-   *
-   * @apiSuccess (200) {json} name description
-   *
-   * @apiParamExample  {json} Request-Example:
-   * {
-   *     "handle" : "myEmail@logic-square.com",
-   *     "password" : "myNewPassword"
-   * }
-   *
-   *
-   * @apiSuccessExample {json} Success-Response:
-   * {
-   *     "error" : false,
-   *     "handle" : "myEmail@logic-square.com",
-   *     "token": "authToken.abc.xyz"
-   * }
-   *
-   *
+   * @swagger
+   * /login:
+   *   post:
+   *     summary: User login
+   *     tags: [Auth]
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               handle:
+   *                 type: string
+   *                 description: The user's email or phone number.
+   *                 example: "myEmail@logic-square.com"
+   *               password:
+   *                 type: string
+   *                 description: The user's password.
+   *                 example: "myNewPassword"
+   *     responses:
+   *       200:
+   *         description: The user was logged in successfully.
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 error:
+   *                   type: boolean
+   *                   example: false
+   *                 handle:
+   *                   type: string
+   *                   example: "myEmail@logic-square.com"
+   *                 token:
+   *                   type: string
+   *                   example: "authToken.abc.xyz"
+   *             examples:
+   *               application/json:
+   *                 value:
+   *                   error: false
+   *                   handle: "myEmail@logic-square.com"
+   *                   token: "authToken.abc.xyz"
+   *       400:
+   *         description: Bad request.
+   *       500:
+   *         description: Some server error.
    */
   async post(req, res) {
     try {

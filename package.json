@@ -10,6 +10,7 @@
     "serve": "nodemon ./bin/www",
     "debug": "nodemon --inspect ./bin/www",
     "lint": "eslint --ext .js,.jsx .",
+    "lint:quiet": "eslint --quiet './**/*.js'",
     "pretest": "npm run lint",
     "test": "cross-env NODE_ENV=development nyc --reporter=lcov --reporter=text mocha --timeout 10000 --exit"
   },
